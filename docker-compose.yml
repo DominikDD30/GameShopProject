@@ -15,7 +15,7 @@ services:
       PostgreSQL:
         condition: service_healthy
   frontend:
-    build: GameShopFrontend
+    build: frontend
     container_name: game_shop_frontend
     ports:
       - "5180:5180"
