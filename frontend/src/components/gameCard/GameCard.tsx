@@ -12,7 +12,7 @@ interface Props {
 const GameCard = ({ game }: Props) => {
   const [isLessWidthThan565] = useMediaQuery('(max-width: 565px)');
   return (
-    <Card  style={{backfaceVisibility:'hidden'}}>
+    <Card overflow="hidden"   borderRadius={10} _hover={{transform:'scale(1.06)',transition:'.2s ease-in'}}  style={{backfaceVisibility:'hidden'}}>
       <Image height={isLessWidthThan565?'90px':'auto'} objectFit='cover' objectPosition='top' src={getCroppedImageUrl(game.mainPhoto)} />
       <CardBody padding={{base:'10px 5px',lg:'10px'}} >
       {/* <CardBody > */}

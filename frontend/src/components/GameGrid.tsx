@@ -65,7 +65,7 @@ const GameGrid = () => {
       </HStack>
       }
     <SimpleGrid columns={isLessWidthThan565?2:displayColumns} spacing={{base:5,md:10}} padding={2}>
-      {(isLoading) &&
+      {(isLoading||isRefetching) &&
         skeletons.map((skeleton,index) => (
           <GameCardContainer key={index}>
             <GameCardSkeleton />
@@ -75,9 +75,9 @@ const GameGrid = () => {
           <>
           {isLessThan1279?
           <GameCard game={game} key={game.gameId} />
-          : <AnimatedTrailerWrapper  trailerUrl={game.trailerUrl!}  gameId={game.gameId}>
-            <GameCard game={game!} key={game.gameId} />
-            </AnimatedTrailerWrapper>
+          // : <AnimatedTrailerWrapper  trailerUrl={game.trailerUrl!}  gameId={game.gameId}>
+            :<GameCard game={game!} key={game.gameId} />
+            // </AnimatedTrailerWrapper>
           }
           </>
           )}
