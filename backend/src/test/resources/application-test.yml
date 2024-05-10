@@ -1,0 +1,16 @@
+api:
+  rawg:
+    url: http://localhost:9999
+
+  google:
+    url: https://localhost:9999
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  security:
+   enabled: false
+
+scheduler:
+  enabled: false

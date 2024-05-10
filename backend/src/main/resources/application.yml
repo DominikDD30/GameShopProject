@@ -1,0 +1,65 @@
+server:
+  port: 8190
+  servlet:
+    context-path: /game-hub
+
+sheduler:
+  refresh:
+    interval:
+      categories: 400
+      platforms: 400
+      newGames: 350
+      simulation: 100
+      updateGames: 170
+    cron: 3 25 22 * * *
+
+
+api:
+  rawg:
+    url: https://api.rawg.io/api
+    apikey: yourKey
+#    apikey: 9b064abe53ba42408d5da63d18839803
+
+
+  google:
+    url: https://www.googleapis.com/customsearch/v1
+    cseid: 250c2214e1add4e87
+    apikey: yourKey
+#    apikey: AIzaSyC5hjZWp2lmPxzr_G_j9eKHCAUbs-1h1Gg
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/game_hub
+    username: postgres
+    password: postgres
+    hikari:
+      idle-timeout: 10000
+      connectionTimeout: 20000
+      minimumIdle: 10
+      maximumPoolSize: 20
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format-sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  security:
+    enabled: true
+
+simulation:
+  updating:
+    external:
+      enabled: false
+    internal:
+      enabled: true
+
+
+

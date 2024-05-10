@@ -1,0 +1,47 @@
+version: '2.1'
+services:
+  backend:
+    build: backend
+    ports:
+      - "8190:8190"
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/game_hub
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - spring-boot-react-postgres
+    depends_on:
+      PostgreSQL:
+        condition: service_healthy
+  frontend:
+    build: GameShopFrontend
+    container_name: game_shop_frontend
+    ports:
+      - "5180:5180"
+    stdin_open: true
+    tty: true
+    networks:
+      - spring-boot-react-postgres
+
+  PostgreSQL:
+    image: postgres:15.0
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=game_hub
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - spring-boot-react-postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  db-data:
+networks:
+  spring-boot-react-postgres:

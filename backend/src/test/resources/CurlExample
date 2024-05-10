@@ -1,0 +1,17 @@
+{
+  "customerName": "Adam",
+  "customerSurname": "Nowak",
+  "customerEmail": "AdamNowak14@o2.pl",
+  "pickupPointName": "string",
+  "deliveryType": "POSTAL",
+  "games": [
+    {
+      "gameName": "witcher",
+      "gamePlatform": "PC",
+      "amount": 2
+    }
+  ],
+  "customerAddressCity": "London",
+  "customerAddressPostalCode": "43-642",
+  "customerAddressStreet": "londonStret35b"
+}
