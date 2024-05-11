@@ -14,9 +14,16 @@ import useGameQueryStore from "../gameQueryStore";
 
 
 const CategoryList = () => {
-  const selectedCategory=useGameQueryStore(s=>s.gameQuery.category);
+  const gameQueryStore=useGameQueryStore();
+  const selectedCategory=gameQueryStore.gameQuery.category;
   const setCategory=useGameQueryStore(s=>s.setCategory);
   const { data,isLoading,error} = useCategories();
+
+
+  const handlechangeCategory=(category:string)=>{
+    gameQueryStore.setPage(0);
+    setCategory(category);
+  }
 
   if (error) return null;
 
@@ -41,7 +48,7 @@ const CategoryList = () => {
                 whiteSpace="normal"
                 textAlign="left"
                 fontWeight={category.categoryName === selectedCategory ? "bold" : "normal"}
-                onClick={() => setCategory(category.categoryName)}
+                onClick={() => handlechangeCategory(category.categoryName)}
                 fontSize="md"
                 variant="link"
               >

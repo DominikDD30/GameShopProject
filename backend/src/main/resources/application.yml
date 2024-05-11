@@ -9,7 +9,7 @@ sheduler:
       categories: 400
       platforms: 400
       newGames: 350
-      simulation: 100
+      simulation: 30
       updateGames: 170
     cron: 3 25 22 * * *
 
