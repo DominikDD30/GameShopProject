@@ -8,6 +8,7 @@ import com.project.gameHubBackend.integration.configuration.PersistenceContainer
 import com.project.gameHubBackend.util.EntityFixturesT;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -26,9 +27,30 @@ import java.util.List;
 class PurchaseJpaRepositoryTest {
 
     private PurchaseJpaRepository purchaseJpaRepository;
-
     private GamePurchaseJpaRepository gamePurchaseJpaRepository;
     private CustomerJpaRepository customerJpaRepository;
+    private CategoryJpaRepository categoryJpaRepository;
+    private CategoryGameJpaRepository categoryGameJpaRepository;
+    private PlatformGameJpaRepository platformGameJpaRepository;
+    private PublisherGameJpaRepository publisherGameJpaRepository;
+    private PlatformJpaRepository platformJpaRepository;
+    private GameJpaRepository gameJpaRepository;
+    private OpinionJpaRepository opinionJpaRepository;
+
+
+
+    @BeforeEach
+    public void beforeEach(){
+        gamePurchaseJpaRepository.deleteAll();
+        purchaseJpaRepository.deleteAll();
+        opinionJpaRepository.deleteAll();
+        categoryGameJpaRepository.deleteAll();
+        publisherGameJpaRepository.deleteAll();
+        platformGameJpaRepository.deleteAll();
+        platformJpaRepository.deleteAll();
+        categoryJpaRepository.deleteAll();
+        gameJpaRepository.deleteAll();
+    }
 
     @Test
     void thatPurchasesCanBeSavedCorrectly() {

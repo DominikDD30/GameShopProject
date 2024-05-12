@@ -4,6 +4,7 @@ import com.project.gameHubBackend.infrastructure.database.entity.CustomerEntity;
 import com.project.gameHubBackend.integration.configuration.PersistenceContainerTestConfiguration;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -20,7 +21,37 @@ import static com.project.gameHubBackend.util.EntityFixturesT.*;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 class CustomerJpaRepositoryTest {
 
+    @Autowired
     private CustomerJpaRepository customerJpaRepository;
+    @Autowired
+    private CategoryJpaRepository categoryJpaRepository;
+
+    @Autowired
+    private CategoryGameJpaRepository categoryGameJpaRepository;
+
+    @Autowired
+    private PlatformGameJpaRepository platformGameJpaRepository;
+
+    @Autowired
+    private PublisherGameJpaRepository publisherGameJpaRepository;
+    @Autowired
+    private PlatformJpaRepository platformJpaRepository;
+    @Autowired
+    private GameJpaRepository gameJpaRepository;
+    @Autowired
+    private OpinionJpaRepository opinionJpaRepository;
+
+
+    @BeforeEach
+    public void beforeEach(){
+        opinionJpaRepository.deleteAll();
+        categoryGameJpaRepository.deleteAll();
+        publisherGameJpaRepository.deleteAll();
+        platformGameJpaRepository.deleteAll();
+        platformJpaRepository.deleteAll();
+        categoryJpaRepository.deleteAll();
+        gameJpaRepository.deleteAll();
+    }
 
 
     @Test

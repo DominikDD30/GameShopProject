@@ -1,6 +1,7 @@
 package com.project.gameHubBackend.integration;
 
 import com.project.gameHubBackend.business.RawgClientService;
+import com.project.gameHubBackend.infrastructure.database.repository.jpa.*;
 import com.project.gameHubBackend.infrastructure.rawg.model.RawgGame;
 import com.project.gameHubBackend.infrastructure.rawg.model.RawgGenre;
 import com.project.gameHubBackend.infrastructure.rawg.model.RawgPlatform;
@@ -8,6 +9,8 @@ import com.project.gameHubBackend.integration.configuration.RestAssuredIntegrati
 import com.project.gameHubBackend.integration.support.WireMockTestSupport;
 import com.project.gameHubBackend.util.RawgFixtures;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -21,6 +24,9 @@ class RawgClientServiceITTest extends RestAssuredIntegrationTestBase implements 
 
     @Autowired
     private RawgClientService rawgClientService;
+
+
+
 
     @Test
     void getRawgGenres() {
