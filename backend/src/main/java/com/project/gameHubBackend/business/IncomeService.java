@@ -60,6 +60,7 @@ public class IncomeService {
 
     private boolean containsCategory(String categoryName, GamePurchase gamePurchase) {
         Game game = gameRepository.getByName(gamePurchase.getGame());
+        if(Objects.isNull(game)) return false;
         Set<String> categoryNames = game.getGameCategories().stream()
                 .map(categoryGame -> categoryGame.getCategory().getCategoryName()).collect(Collectors.toSet());
         return categoryNames.contains(categoryName);

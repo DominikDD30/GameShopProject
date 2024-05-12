@@ -87,21 +87,22 @@ public class GameRepository implements GameDao {
     @Override
     public void decreaseGamePlatformLeftAmount(DesiredGame desiredGame) throws ObjectOptimisticLockingFailureException {
         GameEntity gameEntity = gameJpaRepository.findByName(desiredGame.getGameName());
-        PlatformGameEntity gamePlatform = gameEntity.getGamePlatforms().stream()
+        Optional<PlatformGameEntity> gamePlatform = gameEntity.getGamePlatforms().stream()
                 .filter(gp -> gp.getPlatform().getName().equals(desiredGame.getGamePlatform()))
-                .findFirst().get();
+                .findFirst();
+        if(gamePlatform.isEmpty())return;
 
-        if (gamePlatform.getLeftInStock() - desiredGame.getAmount() < 0) {
+        if (gamePlatform.get().getLeftInStock() - desiredGame.getAmount() < 0) {
             throw new LeftInStockBelowZeroException("Try to decrease Left in Stock when it is already 0");
         } else {
-            gamePlatform.setLeftInStock(gamePlatform.getLeftInStock() - desiredGame.getAmount());
+            gamePlatform.get().setLeftInStock(gamePlatform.get().getLeftInStock() - desiredGame.getAmount());
             boolean isSoldOut = gameEntity.getGamePlatforms().stream().filter(gp -> gp.getLeftInStock() != 0).findAny().isEmpty();
             if (isSoldOut) {
                 gameEntity.setIsSoldOut(true);
             }
         }
 
-        platformGameJpaRepository.save(gamePlatform);
+        platformGameJpaRepository.save(gamePlatform.get());
     }
 
     @Override

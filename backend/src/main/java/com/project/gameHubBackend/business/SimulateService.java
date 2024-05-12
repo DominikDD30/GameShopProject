@@ -118,9 +118,10 @@ public class SimulateService {
 
 
             List<PlatformGame> gamePlatforms = randomGame.getGamePlatforms().stream().toList();
+            Optional<PlatformGame> randomElement = Optional.ofNullable(getRandomElement(gamePlatforms));
             games.add(new DesiredGame(
                     randomGame.getName(),
-                    getRandomElement(gamePlatforms).getPlatform().getName(),
+                    randomElement.isPresent()?randomElement.get().getPlatform().getName():"PC",
                     Functions.getRandomNumber(1,3)));
         }
         return games;
@@ -148,7 +149,8 @@ public class SimulateService {
     }
 
     private static <T> T getRandomElement(List<T> list) {
+        if(list.isEmpty())return null;
         Random random = new Random();
-        return list.get(random.nextInt(list.size()));
+        return list.get(random.nextInt(list.size()-1));
     }
 }

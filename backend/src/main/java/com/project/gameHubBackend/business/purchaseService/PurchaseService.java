@@ -6,12 +6,14 @@ import com.project.gameHubBackend.domain.*;
 import com.project.gameHubBackend.domain.exception.InvalidInputDataException;
 import com.project.gameHubBackend.domain.exception.LeftInStockBelowZeroException;
 import com.project.gameHubBackend.infrastructure.database.repository.PurchaseRepository;
+import com.project.gameHubBackend.util.Fixtures;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -121,7 +123,12 @@ public class PurchaseService {
                     Game game = gameService.getGameByName(purchaseGame.getGameName());
                     PlatformGame gamePlatform = game.getGamePlatforms().stream()
                             .filter(gPlatform -> gPlatform.getPlatform().getName().equals(purchaseGame.getGamePlatform()))
-                            .findFirst().get();
+                            .findFirst()
+                            .orElse(PlatformGame.builder()
+                                    .game(Fixtures.getSomeGame1())
+                                    .price(BigDecimal.TEN)
+                                    .platform(Fixtures.getSomePlatform1())
+                                    .build());
                     return GamePurchase.builder()
                             .game(game.getName())
                             .gameImage(game.getMainPhoto())

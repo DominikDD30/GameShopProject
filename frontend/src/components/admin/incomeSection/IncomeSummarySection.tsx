@@ -21,7 +21,7 @@ const IncomeSummarySection = () => {
     <Stack spacing='20px' p={{base:'0 5px',xl:'0'}}  width='100%' mb='30px'>
         <HStack position='relative'   width={isLessWidthThan500?'100%':'400px'} justifyContent={{base:'space-around',md:'flex-start'}}   spacing={{base:1,md:2}}>
        <DateFromPicker  updateDateFrom={(date)=>setDateFrom(date)}/>
-       <DateToPicker  updateChart={(date)=>setDateTo(date)}/>
+       <DateToPicker  updateChart={(date)=>{console.log(date);setDateTo(date)}}/>
        </HStack>
        <HStack alignItems='flex-end'  width={isLessWidthThan500?'100%':'400px'} justifyContent={{base:'space-around',md:'flex-start'}}>
        <DateStepPicker updateDateStep={(step)=>setScope(step)}/>
